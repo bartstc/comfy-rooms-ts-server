@@ -1,7 +1,18 @@
 import 'dotenv/config';
 import { App } from './app';
 import { UserController } from './modules/user/user.controller';
+import { User } from './modules/user/interfaces/user.interface';
+import { AdminProfileController } from './modules/admin/admin-profile.controller';
 
-const app = new App([new UserController()]);
+// expand Request interface with a new property: user: User
+declare global {
+  namespace Express {
+    interface Request {
+      user: User;
+    }
+  }
+}
+
+const app = new App([new UserController(), new AdminProfileController()]);
 
 app.listen();
