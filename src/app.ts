@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import helmet from 'helmet';
 
 import { Controller } from './interfaces/controller.interface';
+import { errorMiddleware } from './middlewares/error.middleware';
 
 export class App {
   public app: Application;
@@ -13,6 +14,7 @@ export class App {
     this.connectToTheDatabase();
     this.initializeMiddlewares();
     this.initializeControllers(controllers);
+    this.initializeErrorHandling();
   }
 
   listen() {
@@ -28,6 +30,10 @@ export class App {
   private initializeMiddlewares() {
     this.app.use(express.json());
     this.app.use(helmet());
+  }
+
+  private initializeErrorHandling() {
+    this.app.use(errorMiddleware);
   }
 
   private initializeControllers(controllers: Controller[]) {
