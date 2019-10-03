@@ -32,7 +32,7 @@ export class App {
 
   private initializeControllers(controllers: Controller[]) {
     controllers.forEach(({ router }) => {
-      this.app.use('/', router);
+      this.app.use('/api', router);
     });
   }
 
