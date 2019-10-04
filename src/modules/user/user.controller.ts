@@ -4,6 +4,7 @@ import { Controller } from '../../interfaces/controller.interface';
 import { UserService } from './user.service';
 import { SignUpDTO } from './dto/sign-up.dto';
 import { SignInDTO } from './dto/sign-in.dto';
+import { validationMiddleware } from '../../middlewares/validation.middleware';
 
 export class UserController implements Controller {
   public path = '/users';
@@ -16,8 +17,12 @@ export class UserController implements Controller {
 
   private initializeRoutes(): void {
     this.router
-      .post(`${this.path}/signup`, this.signUp)
-      .post(`${this.path}/signin`, this.signIn);
+      .post(`${this.path}/signup`, validationMiddleware(SignUpDTO), this.signUp)
+      .post(
+        `${this.path}/signin`,
+        validationMiddleware(SignInDTO),
+        this.signIn
+      );
   }
 
   private async signUp(

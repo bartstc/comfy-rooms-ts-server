@@ -1,4 +1,4 @@
-import { RequestHandler } from 'express';
+import { RequestHandler, Request, Response, NextFunction } from 'express';
 import { plainToClass } from 'class-transformer';
 import { validate, ValidationError } from 'class-validator';
 
@@ -8,7 +8,7 @@ export const validationMiddleware = (
   type: any,
   skipMissingProperties = false
 ): RequestHandler => {
-  return (req, _, next) => {
+  return (req: Request, _: Response, next: NextFunction) => {
     validate(plainToClass(type, req.body), { skipMissingProperties }).then(
       (errors: ValidationError[]) => {
         if (errors.length > 0) {

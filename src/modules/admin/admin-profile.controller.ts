@@ -2,6 +2,8 @@ import express, { Request, Response, NextFunction } from 'express';
 
 import { Controller } from '../../interfaces/controller.interface';
 import { AdminProfileService } from './admin-profile.service';
+import { authMiddleware } from '../../middlewares/auth.middleware';
+import { verifyRoleMiddleware } from '../../middlewares/verify-role.middleware';
 
 export class AdminProfileController implements Controller {
   public path = '/admin';
@@ -14,6 +16,7 @@ export class AdminProfileController implements Controller {
 
   private initializeRoutes(): void {
     this.router
+      .all(`${this.path}/*`, authMiddleware, verifyRoleMiddleware('Admin'))
       .post(`${this.path}/profile`, this.createAdminProfile)
       .put(`${this.path}/register`, this.registerUser);
   }

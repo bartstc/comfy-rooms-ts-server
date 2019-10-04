@@ -13,7 +13,7 @@ import { WrongCredentialsException } from '../../exceptions/wrong-credentials-ex
 export class UserService {
   private user = userModel;
 
-  async signUp(userData: SignUpDTO) {
+  async signUp(userData: SignUpDTO): Promise<User> {
     const { email, password } = userData;
     const existingUser = await this.user.findOne({ email });
 
@@ -32,7 +32,7 @@ export class UserService {
     return newUser;
   }
 
-  async signIn(userData: SignInDTO) {
+  async signIn(userData: SignInDTO): Promise<string> {
     const { email, password } = userData;
     const user = await this.user.findOne({ email });
 
