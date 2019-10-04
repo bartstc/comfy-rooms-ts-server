@@ -4,6 +4,7 @@ import { App } from './app';
 import { User } from './modules/user/interfaces/user.interface';
 import { UserController } from './modules/user/user.controller';
 import { AdminProfileController } from './modules/admin/admin-profile.controller';
+import { ProfileController } from './modules/profile/profile.controller';
 
 // expand Request interface with a new property: user: User
 declare global {
@@ -14,6 +15,10 @@ declare global {
   }
 }
 
-const app = new App([new UserController(), new AdminProfileController()]);
+const app = new App([
+  new UserController(),
+  new AdminProfileController(),
+  new ProfileController()
+]);
 
 app.listen();
