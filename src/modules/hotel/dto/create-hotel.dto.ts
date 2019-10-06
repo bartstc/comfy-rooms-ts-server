@@ -1,4 +1,3 @@
-import { CreatePinDTO } from './create-pin.dto';
 import {
   IsString,
   IsArray,
@@ -7,6 +6,9 @@ import {
   ValidateNested,
   IsNumber
 } from 'class-validator';
+
+import { Image } from '../interfaces/hotel.interface';
+import { CreatePinDTO } from './create-pin.dto';
 import { CreateEmailTemplateDTO } from './create-email-template.dto';
 
 export class CreateHotelDTO {
@@ -32,7 +34,7 @@ export class CreateHotelDTO {
 
   @IsArray()
   @IsOptional()
-  images?: string[];
+  images!: Image[];
 
   @IsNumber()
   @IsNotEmpty()
