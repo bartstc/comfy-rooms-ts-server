@@ -11,7 +11,7 @@ export class HotelService {
 
     const newPin = await new this.pin({
       ...pin,
-      image: images.length ? images[0].url : null
+      image: images && images.length ? images[0].url : null
     }).save();
 
     return new this.hotel({

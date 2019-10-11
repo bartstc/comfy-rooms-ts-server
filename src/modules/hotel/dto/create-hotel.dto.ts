@@ -7,6 +7,7 @@ import {
   IsNumber
 } from 'class-validator';
 
+import { Type } from '../../room/interfaces/room.interface';
 import { Image } from '../interfaces/hotel.interface';
 import { CreatePinDTO } from './create-pin.dto';
 import { CreateEmailTemplateDTO } from './create-email-template.dto';
@@ -14,7 +15,7 @@ import { CreateEmailTemplateDTO } from './create-email-template.dto';
 export class CreateHotelDTO {
   @IsString()
   @IsNotEmpty()
-  type!: string;
+  type!: Type;
 
   @IsString()
   @IsNotEmpty()
@@ -34,7 +35,7 @@ export class CreateHotelDTO {
 
   @IsArray()
   @IsOptional()
-  images!: Image[];
+  images?: Image[];
 
   @IsNumber()
   @IsNotEmpty()
